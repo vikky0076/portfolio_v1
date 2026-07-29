@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-primary: #0B0B0B;
+  --color-secondary: #131313;
+  --color-accent: #FF5E00;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8B8B8;
+  
+  --font-sans: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
+  --font-syne: var(--font-syne), sans-serif;
+  --font-playfair: var(--font-playfair), serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --animate-orbit-rotate: orbit-rotate 35s linear infinite;
+  --animate-orbit-rotate-reverse: orbit-rotate-reverse 45s linear infinite;
+  --animate-marquee-left: marquee-left 35s linear infinite;
+  --animate-marquee-right: marquee-right 35s linear infinite;
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @keyframes orbit-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes orbit-rotate-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  @keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marquee-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.05); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom Base resets */
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  scroll-behavior: auto;
+  overflow-x: hidden;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F1F1F;
+  border-radius: 4px;
+  border: 2px solid #0B0B0B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF5E00;
+}
+
+/* Cursor Glow System */
+.cursor-glow {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 94, 0, 0.08) 0%, rgba(255, 94, 0, 0) 70%);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  will-change: transform;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(19, 19, 19, 0.45);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 94, 0, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 94, 0, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(255, 94, 0, 0.05);
+}
+
+/* Custom Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, #FF5E00 0%, #FF9E66 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-accent-gradient {
+  background: linear-gradient(135deg, #FF5E00 0%, #FF8533 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Neon Borders & Shadows */
+.neon-border {
+  border-color: rgba(255, 94, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 94, 0, 0.15);
+}
+
+.glow-orange {
+  filter: drop-shadow(0 0 15px rgba(255, 94, 0, 0.35));
+}
+
+/* Orbit Path Drawing */
+.orbit-ring {
+  border: 1.5px solid rgba(255, 94, 0, 0.04);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* GitHub contributions styles */
+.git-grid-square {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+.git-grid-square.level-0 { background-color: #171717; }
+.git-grid-square.level-1 { background-color: rgba(255, 94, 0, 0.2); }
+.git-grid-square.level-2 { background-color: rgba(255, 94, 0, 0.45); }
+.git-grid-square.level-3 { background-color: rgba(255, 94, 0, 0.7); }
+.git-grid-square.level-4 { background-color: #FF5E00; box-shadow: 0 0 8px rgba(255, 94, 0, 0.5); }
+
+/* Hide default input outline */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(255, 94, 0, 0.4) !important;
+  box-shadow: 0 0 10px rgba(255, 94, 0, 0.1);
 }

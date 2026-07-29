@@ -1,0 +1,14 @@
+# Normalize line endings for cross-platform consistency
+* text=auto eol=lf
+
+# Keep Windows batch files as CRLF when needed
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Mark binary assets explicitly
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
