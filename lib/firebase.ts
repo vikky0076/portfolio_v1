@@ -16,11 +16,12 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 
-// Initialize Firestore with offline persistence enabled
+// Initialize Firestore with offline persistence and long-polling enabled to bypass WebSocket blocks
 const db = initializeFirestore(app, {
   localCache: persistentLocalCache({
     tabManager: persistentMultipleTabManager(),
   }),
+  experimentalForceLongPolling: true,
 });
 
 export { app, auth, db };

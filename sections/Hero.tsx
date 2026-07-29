@@ -105,7 +105,7 @@ export default function Hero() {
             <span className="font-playfair italic font-normal text-text-secondary text-4xl sm:text-5xl lg:text-6xl tracking-wide select-none">
               Hi, I'm
             </span>
-            <span className="font-syne font-extrabold uppercase text-gradient tracking-tight text-6xl sm:text-8xl lg:text-[100px] leading-none py-1 block drop-shadow-[0_0_35px_rgba(255,94,0,0.2)]">
+            <span className="font-syne font-extrabold uppercase text-gradient tracking-tight text-5xl sm:text-8xl lg:text-[100px] leading-none py-1 block drop-shadow-[0_0_35px_rgba(255,94,0,0.2)]">
               Vignesh
             </span>
           </motion.h1>

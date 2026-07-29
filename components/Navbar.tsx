@@ -180,14 +180,59 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden text-white hover:text-accent transition-colors focus:outline-none p-1.5 rounded-lg border border-white/5 bg-secondary/50"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Mobile controls: Sign In & Menu Toggle */}
+          <div className="flex lg:hidden items-center gap-3">
+            {/* Mobile Auth Button / Avatar */}
+            {user ? (
+              <div className="flex items-center gap-2 bg-secondary/50 border border-white/5 rounded-full pl-1.5 pr-2.5 py-1.5 backdrop-blur-sm shadow-md">
+                <img
+                  src={user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.email}`}
+                  alt={user.displayName || 'User'}
+                  className="w-5.5 h-5.5 rounded-full border border-white/10"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/bottts/svg?seed=${user.email}`;
+                  }}
+                />
+                
+                {user.email === 'vigneshbs7653@gmail.com' && (
+                  <button
+                    onClick={() => router.push('/admin')}
+                    className="p-0.5 text-accent hover:text-white transition-colors cursor-pointer"
+                    title="Admin Panel"
+                  >
+                    <ShieldAlert size={12} />
+                  </button>
+                )}
+                
+                <button
+                  onClick={() => logout()}
+                  className="p-0.5 text-text-secondary hover:text-red-400 transition-colors cursor-pointer"
+                  title="Sign Out"
+                >
+                  <LogOut size={11} />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push('/login');
+                }}
+                className="relative inline-flex items-center justify-center px-3.5 py-1.5 text-[9px] uppercase tracking-widest font-bold font-display rounded-full border border-white/10 hover:border-accent hover:text-accent transition-all duration-300 cursor-pointer focus:outline-none"
+              >
+                Sign In
+              </button>
+            )}
+
+            {/* Mobile menu toggle */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="text-white hover:text-accent transition-colors focus:outline-none p-1.5 rounded-lg border border-white/5 bg-secondary/50"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </header>
 
