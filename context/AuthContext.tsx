@@ -149,7 +149,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (email) {
           try {
             const result = await signInWithEmailLink(auth, email, window.location.href);
-            await syncUserToFirestore(result.user);
+            // Sync user metadata to Firestore in the background
+            syncUserToFirestore(result.user);
             window.localStorage.removeItem('emailForSignIn');
             
             // Clean URL query parameters
@@ -168,7 +169,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        await syncUserToFirestore(currentUser);
+        // Sync user metadata to Firestore in the background without blocking the UI loading state
+        syncUserToFirestore(currentUser);
       } else {
         setUser(null);
       }

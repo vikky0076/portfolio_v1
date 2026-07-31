@@ -83,36 +83,25 @@ export default function ContactModal() {
     setFormState('submitting');
     setSubmitError(null);
 
-    // Timeout helper to prevent infinite loading state
-    function promiseWithTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
-      return new Promise<T>((resolve, reject) => {
-        const timer = setTimeout(() => reject(new Error('timeout')), ms);
-        promise
-          .then((res) => {
-            clearTimeout(timer);
-            resolve(res);
-          })
-          .catch((err) => {
-            clearTimeout(timer);
-            reject(err);
-          });
-      });
-    }
-
     try {
-      // Save submission inside Firestore contact_messages collection with a 7-second timeout limit
-      await promiseWithTimeout(
-        addDoc(collection(db, 'contact_messages'), {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          createdAt: serverTimestamp(),
-          status: 'New',
-          userId: user?.uid || null,
-        }),
-        7000
-      );
+      // Save submission inside Firestore contact_messages collection.
+      // With local persistence enabled, Firestore writes update the local cache immediately and sync in the background.
+      const docRefPromise = addDoc(collection(db, 'contact_messages'), {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        createdAt: serverTimestamp(),
+        status: 'New',
+        userId: user?.uid || null,
+      });
+
+      // We wait up to 2 seconds for server acknowledgment. If it takes longer (slow connection/offline),
+      // we proceed to the success view anyway and let Firestore sync in the background.
+      await Promise.race([
+        docRefPromise,
+        new Promise((resolve) => setTimeout(resolve, 2000))
+      ]);
 
       setFormState('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -125,11 +114,7 @@ export default function ContactModal() {
     } catch (err: any) {
       console.error('Error submitting contact form:', err);
       setFormState('idle');
-      if (err.message === 'timeout') {
-        setSubmitError('Connection timed out. Please check your internet connection or try again.');
-      } else {
-        setSubmitError(err.message || 'Failed to transmit message. Please verify your connection.');
-      }
+      setSubmitError(err.message || 'Failed to transmit message. Please verify your connection.');
     }
   };
 

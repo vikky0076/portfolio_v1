@@ -5,6 +5,15 @@ import { motion } from 'framer-motion';
 import { Award, ExternalLink } from 'lucide-react';
 
 const CERTIFICATES = [
+  { name: 'AI for Sustainability Virtual Internship', issuer: '1M1B & IBM SkillsBuild', href: 'https://skillsbuild.org/' },
+  { name: 'Fundamentals of Sustainability and Technology', issuer: 'IBM SkillsBuild', href: 'https://skillsbuild.org/' },
+  { name: 'AI Skills Passport', issuer: 'EY & Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },
+  { name: 'Data Analysis with Python', issuer: 'Cognitive Class (IBM)', href: 'https://courses.cognitiveclass.ai/certificates/425a8905a59c47ebb5a619ec72374a9c' },
+  { name: 'Exploring Data Transformation with Google Cloud', issuer: 'Google Cloud', href: 'https://grow.google/' },
+  { name: 'Digital Skills: User Experience', issuer: 'Accenture', href: 'https://www.futurelearn.com/certificates/ioscxbf' },
+  { name: 'Programming with Python 3.X', issuer: 'Simplilearn', href: 'https://simplilearn.com' },
+  { name: 'Introduction to Generative AI', issuer: 'Google Cloud', href: 'https://grow.google/' },
+  { name: 'Introduction to Prompt Engineering', issuer: 'Simplilearn', href: 'https://simplilearn.com' },
   { name: 'Python for Data Science', issuer: 'IBM', href: 'https://credentials.edx.org/' },
   { name: 'AI Fundamentals', issuer: 'Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },
   { name: 'Azure Fundamentals', issuer: 'Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },

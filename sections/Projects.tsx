@@ -2,33 +2,73 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, MessageSquare, QrCode, Calculator } from 'lucide-react';
+import { ExternalLink, MessageSquare, QrCode, Calculator, Film, Play, Clock, Waves, GraduationCap, Laptop } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
 const PROJECTS = [
   {
-    title: 'AI Chatbot for Student Support',
-    desc: 'AI-powered assistant that helps students with instant answers, resources and guidance.',
-    tags: ['Next.js', 'OpenAI API', 'Tailwind CSS'],
-    liveHref: '#',
+    title: 'Student AI Chatbot',
+    desc: 'Conversational AI agent for students, offering quick guidance, reference search, and study guides.',
+    tags: ['Next.js', 'OpenAI API', 'Framer Motion'],
+    liveHref: 'https://thoughtful-text-bot.lovable.app',
     githubHref: 'https://github.com/vikky0076',
     previewType: 'chat',
   },
   {
     title: 'Smart Attendance System',
-    desc: 'QR-based attendance system with location verification and real-time reporting.',
+    desc: 'QR-based smart attendance tracker with secure location verification and real-time statistics.',
     tags: ['React', 'Node.js', 'MongoDB'],
-    liveHref: '#',
+    liveHref: 'https://sas-smart.vercel.app',
     githubHref: 'https://github.com/vikky0076',
     previewType: 'qr',
   },
   {
     title: 'CGPA Calculator',
-    desc: 'Simple and fast CGPA calculator for university students with beautiful UI.',
+    desc: 'Simple and fast CGPA calculator for university students with a beautiful, responsive user interface.',
     tags: ['HTML', 'CSS', 'JavaScript'],
-    liveHref: '#',
+    liveHref: 'https://novyrax-cgpa-calci.vercel.app/',
     githubHref: 'https://github.com/vikky0076',
     previewType: 'calc',
+  },
+  {
+    title: 'Chess Clock System',
+    desc: 'Dynamic digital chess timer supporting custom time controls, delays, and intuitive player controls.',
+    tags: ['React', 'Tailwind CSS', 'Framer Motion'],
+    liveHref: 'https://chess-clock-silk.vercel.app/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'chess',
+  },
+  {
+    title: 'Flood Safe AI System',
+    desc: 'Advanced AI model predicting and warning against flood risks based on hydrological sensor data.',
+    tags: ['Python', 'Machine Learning', 'Next.js'],
+    liveHref: 'https://floot-safe-ai.netlify.app/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'flood',
+  },
+  {
+    title: 'Skillora Learning Website',
+    desc: 'Feature-rich, interactive e-learning platform providing course directories and custom assessments.',
+    tags: ['Next.js', 'Tailwind CSS', 'Firebase'],
+    liveHref: 'https://skilloralearn.vercel.app/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'skillora',
+  },
+  {
+    title: 'Dreams Cut Production Portfolio',
+    desc: 'Highly stylized company showcase website representing a digital production agency.',
+    tags: ['HTML', 'Tailwind CSS', 'JavaScript'],
+    liveHref: 'https://dreamscutproduction.netlify.app/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'dcp',
+  },
+  {
+    title: 'Dynamic & Static Portfolios',
+    desc: 'A repository of interactive responsive developer profiles and single-page landing site layouts.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    liveHref: 'https://vikky5376.github.io/portpolio/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'portfolios',
   },
 ];
 
@@ -87,6 +127,113 @@ export default function Projects() {
             </div>
           </div>
         );
+      case 'dcp':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center">
+              <span className="text-[8px] font-bold font-display text-accent uppercase tracking-wider">Dreams Cut Production</span>
+              <Film size={10} className="text-accent" />
+            </div>
+            <div className="flex items-center justify-center gap-4 py-2">
+              <div className="w-8 h-8 rounded-full bg-accent/15 border border-accent/20 flex items-center justify-center text-accent animate-pulse">
+                <Play size={12} fill="currentColor" className="ml-0.5" />
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[7px] text-white font-semibold">Active Timeline</span>
+                <span className="text-[6px] text-text-secondary">Render: 4K UHD</span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center text-[6px] text-text-secondary">
+              <span>02:14 / 05:00</span>
+              <div className="w-16 h-1 bg-primary rounded-full overflow-hidden">
+                <div className="h-full bg-accent w-[45%]" />
+              </div>
+            </div>
+          </div>
+        );
+      case 'chess':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span className="text-[8px] font-bold font-display text-white">CHESS TIMERS</span>
+              <Clock size={10} className="text-accent" />
+            </div>
+            <div className="grid grid-cols-2 gap-2 items-center justify-center py-2 text-center">
+              <div className="bg-primary/60 border border-accent/20 rounded-lg p-1.5 flex flex-col">
+                <span className="text-[6px] text-accent uppercase tracking-widest font-bold">White</span>
+                <span className="text-sm font-extrabold font-mono text-white">05:00</span>
+              </div>
+              <div className="bg-accent/10 border border-accent/40 rounded-lg p-1.5 flex flex-col animate-pulse">
+                <span className="text-[6px] text-accent uppercase tracking-widest font-bold">Black</span>
+                <span className="text-sm font-extrabold font-mono text-accent">04:52</span>
+              </div>
+            </div>
+            <span className="text-[6px] text-text-secondary text-center uppercase tracking-widest">Active Turn: Black</span>
+          </div>
+        );
+      case 'flood':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center">
+              <span className="text-[8px] font-bold font-display text-emerald-400 uppercase tracking-wider">Flood Safe AI</span>
+              <Waves size={10} className="text-emerald-400" />
+            </div>
+            <div className="flex flex-col gap-1 items-center justify-center py-1">
+              <span className="text-xl font-extrabold font-display text-emerald-400 glow-emerald">SAFE</span>
+              <span className="text-[6px] uppercase tracking-widest text-text-secondary">Water Level: 1.2m</span>
+            </div>
+            <div className="flex justify-between items-center text-[6px] text-text-secondary">
+              <span>Risk Level: 5%</span>
+              <div className="w-16 h-1 bg-primary rounded-full overflow-hidden">
+                <div className="h-full bg-emerald-500 w-[5%]" />
+              </div>
+            </div>
+          </div>
+        );
+      case 'skillora':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span className="text-[8px] font-bold font-display text-white">Skillora LMS</span>
+              <GraduationCap size={10} className="text-accent" />
+            </div>
+            <div className="flex flex-col gap-1.5 py-1 text-left">
+              <div className="flex justify-between text-[7px] text-text-secondary font-semibold">
+                <span>React Advanced Course</span>
+                <span className="text-accent font-bold">85% Done</span>
+              </div>
+              <div className="w-full h-1 bg-primary rounded-full overflow-hidden">
+                <div className="h-full bg-accent w-[85%]" />
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 bg-primary/40 border border-white/5 rounded px-2 py-0.5 self-start">
+              <span className="w-1 h-1 rounded-full bg-accent animate-pulse" />
+              <span className="text-[6px] text-text-secondary">Next Assessment: Routing</span>
+            </div>
+          </div>
+        );
+      case 'portfolios':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center">
+              <span className="text-[8px] font-bold font-display text-white uppercase tracking-wider">Theme Showcase</span>
+              <Laptop size={10} className="text-accent" />
+            </div>
+            <div className="bg-primary/60 border border-white/5 rounded-lg p-2 flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-[8px] font-extrabold text-accent">
+                VB
+              </div>
+              <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+                <div className="h-1 bg-white/20 rounded w-16" />
+                <div className="h-1 bg-white/10 rounded w-24" />
+              </div>
+            </div>
+            <div className="flex justify-between text-[6px] text-text-secondary uppercase tracking-widest">
+              <span>Static Dev Theme</span>
+              <span className="text-accent">Active</span>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -124,37 +271,47 @@ export default function Projects() {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               className="glass-card rounded-3xl p-6 flex flex-col justify-between relative group hover:scale-[1.02] duration-300"
             >
-              {/* Mockup Preview Area */}
-              <div className="w-full h-[180px] rounded-2xl overflow-hidden mb-6 bg-primary/20 border border-white/5 flex items-center justify-center p-3 relative">
-                {renderPreview(proj.previewType)}
-              </div>
-
-              {/* Text Details */}
-              <div className="flex flex-col text-left flex-grow mb-6">
-                <h3 className="text-lg font-bold font-display text-white mb-2 group-hover:text-accent transition-colors duration-300">
-                  {proj.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-sans mb-4">
-                  {proj.desc}
-                </p>
-
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {proj.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="text-[10px] px-3 py-1 rounded-lg bg-secondary border border-white/5 text-text-secondary font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              {/* Clickable Card Body linking to Live Site */}
+              <a
+                href={proj.liveHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col flex-grow cursor-pointer"
+              >
+                {/* Mockup Preview Area */}
+                <div className="w-full h-[180px] rounded-2xl overflow-hidden mb-6 bg-primary/20 border border-white/5 flex items-center justify-center p-3 relative">
+                  {renderPreview(proj.previewType)}
                 </div>
-              </div>
+
+                {/* Text Details */}
+                <div className="flex flex-col text-left flex-grow mb-6">
+                  <h3 className="text-lg font-bold font-display text-white mb-2 group-hover:text-accent transition-colors duration-300">
+                    {proj.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-sans mb-4">
+                    {proj.desc}
+                  </p>
+
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {proj.tags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[10px] px-3 py-1 rounded-lg bg-secondary border border-white/5 text-text-secondary font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </a>
 
               {/* Action Buttons */}
-              <div className="flex gap-3 w-full">
+              <div className="flex gap-3 w-full relative z-10">
                 <a
                   href={proj.liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 text-center text-xs uppercase tracking-widest font-bold py-3 bg-accent/10 border border-accent/25 hover:bg-accent hover:text-white text-accent rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5"
                 >
                   Live Demo <ExternalLink size={12} />
