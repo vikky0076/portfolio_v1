@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, LogOut, ShieldAlert } from 'lucide-react';
+import { Menu, X, LogOut, ShieldAlert, Download } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
@@ -89,7 +89,7 @@ export default function Navbar() {
               <path d="M 28,15 L 39,15 C 44,15 46,18 46,22.5 C 46,26 44,26 39,26 L 28,26" />
             </svg>
             <span className="text-white font-display text-xs font-bold tracking-widest uppercase transition-colors duration-300 group-hover:text-accent">
-              VIGNESH B
+              VIGNESH
             </span>
           </a>
 
@@ -125,6 +125,15 @@ export default function Navbar() {
 
           {/* Action CTA Button / Auth Badge */}
           <div className="hidden lg:flex items-center gap-4">
+            <a
+              href="/assets/resume.pdf"
+              download="Vignesh_B_Resume.pdf"
+              className="relative inline-flex items-center gap-1.5 justify-center px-4 py-2 text-[10px] uppercase tracking-widest font-bold font-display rounded-full border border-white/10 bg-secondary/35 hover:bg-white/5 hover:border-white/20 text-white shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none"
+            >
+              <Download size={12} className="text-accent animate-pulse" />
+              Resume
+            </a>
+
             {user ? (
               <div className="flex items-center gap-2.5 bg-secondary/50 border border-white/5 rounded-full px-3 py-1.5 backdrop-blur-sm shadow-md">
                 <img
@@ -163,7 +172,7 @@ export default function Navbar() {
                   e.preventDefault();
                   router.push('/login');
                 }}
-                className="relative inline-flex items-center justify-center px-5 py-2 text-[10px] uppercase tracking-widest font-bold font-display rounded-full border border-white/10 hover:border-accent hover:text-accent transition-all duration-300 cursor-pointer focus:outline-none"
+                className="relative inline-flex items-center justify-center px-5 py-2 text-[10px] uppercase tracking-widest font-bold font-display rounded-full border border-accent text-accent hover:bg-accent hover:text-white shadow-[0_0_15px_rgba(255,94,0,0.15)] hover:shadow-[0_0_20px_rgba(255,94,0,0.3)] transition-all duration-300 cursor-pointer focus:outline-none"
               >
                 Sign In
               </button>
@@ -218,7 +227,7 @@ export default function Navbar() {
                   e.preventDefault();
                   router.push('/login');
                 }}
-                className="relative inline-flex items-center justify-center px-3.5 py-1.5 text-[9px] uppercase tracking-widest font-bold font-display rounded-full border border-white/10 hover:border-accent hover:text-accent transition-all duration-300 cursor-pointer focus:outline-none"
+                className="relative inline-flex items-center justify-center px-3.5 py-1.5 text-[9px] uppercase tracking-widest font-bold font-display rounded-full border border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 cursor-pointer focus:outline-none"
               >
                 Sign In
               </button>
@@ -268,6 +277,15 @@ export default function Navbar() {
               })}
             </nav>
             <div className="flex flex-col items-center gap-4 mt-6 w-full max-w-xs mx-auto">
+              <a
+                href="/assets/resume.pdf"
+                download="Vignesh_B_Resume.pdf"
+                className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full border border-white/10 bg-secondary/35 hover:bg-white/5 hover:border-white/20 text-white flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer focus:outline-none"
+              >
+                <Download size={14} className="text-accent" />
+                Download Resume
+              </a>
+
               {user ? (
                 <div className="flex flex-col items-center gap-3 w-full border border-white/5 bg-secondary/20 rounded-2xl p-4 shadow-lg">
                   <div className="flex items-center gap-3 w-full">
@@ -319,7 +337,7 @@ export default function Navbar() {
                     setMobileOpen(false);
                     router.push('/login');
                   }}
-                  className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full border border-white/10 text-white hover:bg-white/5 transition-all duration-300 cursor-pointer focus:outline-none"
+                  className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full border border-accent text-accent hover:bg-accent/10 transition-all duration-300 cursor-pointer focus:outline-none"
                 >
                   Sign In
                 </button>

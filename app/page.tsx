@@ -8,10 +8,12 @@ import AchievementsRibbon from "@/sections/AchievementsRibbon";
 import Contact from "@/sections/Contact";
 import Footer from "@/sections/Footer";
 import ContactModal from "@/components/ContactModal";
+import SplashScreen from "@/components/SplashScreen";
 
 export default function Home() {
   return (
     <main className="w-full flex flex-col">
+      <SplashScreen />
       {/* Scroll sections */}
       <Hero />
       <About />

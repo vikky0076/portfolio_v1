@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import profileImg from '@/public/assets/profile.png';
 import { motion } from 'framer-motion';
-import { FaLinkedinIn, FaGithub, FaEnvelope, FaCode } from 'react-icons/fa';
+import { FaLinkedinIn, FaGithub, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
 const TYPEWRITER_WORDS = [
   'Software Engineer',
@@ -131,7 +131,7 @@ export default function Hero() {
               { icon: FaLinkedinIn, href: 'https://linkedin.com/in/vignesh-b' },
               { icon: FaGithub, href: 'https://github.com/vikky0076' },
               { icon: FaEnvelope, href: 'mailto:vigneshb00x@gmail.com' },
-              { icon: FaCode, href: 'https://github.com/vikky0076' },
+              { icon: FaWhatsapp, href: 'https://wa.me/919943349064' },
             ].map((social, index) => {
               const Icon = social.icon;
               return (
@@ -150,7 +150,7 @@ export default function Hero() {
         </div>
 
         {/* Right Column - Avatar & Parallax Orbit */}
-        <div className="lg:col-span-5 flex justify-center items-center relative py-12">
+        <div className="lg:col-span-5 flex justify-center items-center relative pt-4 pb-12 lg:py-0 lg:-mt-24">
           {/* Background is clean and transparent */}
 
           {/* Profile Picture Wrapper */}
@@ -185,75 +185,7 @@ export default function Hero() {
               <div className="absolute inset-x-[-8px] inset-y-[-3px] border border-dashed border-[#FF8B3D]/20 rounded-full rotate-[8deg] scale-y-30 animate-orbit-rotate-reverse opacity-60" />
             </div>
 
-            {/* Orange Thunder/Lightning Background Shape */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ 
-                opacity: [0.4, 0.7, 0.4],
-                scale: [0.98, 1.02, 0.98]
-              }}
-              transition={{ 
-                opacity: { repeat: Infinity, duration: 4, ease: "easeInOut" },
-                scale: { repeat: Infinity, duration: 6, ease: "easeInOut" },
-                delay: 0.5 
-              }}
-              className="absolute inset-0 z-0 flex justify-center items-center pointer-events-none select-none w-full h-[95%] top-[2%]"
-            >
-              <svg
-                viewBox="0 0 100 200"
-                className="w-[75%] h-full filter drop-shadow-[0_0_20px_rgba(255,94,0,0.3)]"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  <linearGradient id="thunder-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FF5E00" stopOpacity="0.35" />
-                    <stop offset="50%" stopColor="#FF8B3D" stopOpacity="0.1" />
-                    <stop offset="100%" stopColor="#FF5E00" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                {/* Glowing Background Body */}
-                <path
-                  d="M 60 10 L 35 90 L 55 90 L 30 150 L 50 150 L 40 190 L 65 110 L 45 110 L 70 50 L 52 50 Z"
-                  fill="url(#thunder-grad)"
-                  stroke="#FF5E00"
-                  strokeWidth="2"
-                  strokeLinejoin="miter"
-                  opacity="0.8"
-                />
-                {/* Thick Outer Glow Stroke */}
-                <path
-                  d="M 60 10 L 35 90 L 55 90 L 30 150 L 50 150 L 40 190 L 65 110 L 45 110 L 70 50 L 52 50 Z"
-                  fill="none"
-                  stroke="#FF5E00"
-                  strokeWidth="8"
-                  strokeLinecap="round"
-                  strokeLinejoin="miter"
-                  opacity="0.3"
-                  className="blur-[6px]"
-                />
-                {/* Middle Glow Stroke */}
-                <path
-                  d="M 60 10 L 35 90 L 55 90 L 30 150 L 50 150 L 40 190 L 65 110 L 45 110 L 70 50 L 52 50 Z"
-                  fill="none"
-                  stroke="#FF8B3D"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="miter"
-                  opacity="0.6"
-                  className="blur-[2px]"
-                />
-                {/* Bright Core Stroke */}
-                <path
-                  d="M 60 10 L 35 90 L 55 90 L 30 150 L 50 150 L 40 190 L 65 110 L 45 110 L 70 50 L 52 50 Z"
-                  fill="none"
-                  stroke="#FFEAD1"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="miter"
-                  opacity="0.95"
-                />
-              </svg>
-            </motion.div>
+
 
             {/* Image Container with CSS Mask for smooth fade-out */}
             <div 
@@ -276,24 +208,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Downward mouse-scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden sm:block">
-        <button
-          onClick={() => handleScrollTo('about')}
-          className="flex flex-col items-center gap-2 group focus:outline-none"
-        >
-          <span className="w-5 h-8 border border-white/20 rounded-full flex justify-center p-1.5 transition-colors group-hover:border-accent">
-            <motion.span
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-              className="w-1 h-1.5 bg-accent rounded-full"
-            />
-          </span>
-          <span className="text-[9px] uppercase tracking-widest text-text-secondary group-hover:text-white transition-colors">
-            
-          </span>
-        </button>
-      </div>
+
     </section>
   );
 }

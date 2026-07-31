@@ -9,7 +9,9 @@ import {
   sendSignInLinkToEmail, 
   isSignInWithEmailLink, 
   signInWithEmailLink,
-  User as FirebaseUser
+  User as FirebaseUser,
+  signInWithRedirect,
+  getRedirectResult
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
@@ -78,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Google OAuth Popup
+  // Google OAuth Popup with Redirect fallback if popups are blocked
   const loginWithGoogle = async () => {
     setLoading(true);
     setError(null);
@@ -88,8 +90,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await syncUserToFirestore(result.user);
     } catch (err: any) {
       console.error('Google login error:', err);
-      setError(err.message || 'Failed to sign in with Google');
-      setLoading(false);
+      if (err.code === 'auth/popup-blocked') {
+        try {
+          await signInWithRedirect(auth, provider);
+        } catch (redirectErr: any) {
+          console.error('Google redirect login error:', redirectErr);
+          setError(redirectErr.message || 'Failed to redirect to Google sign in');
+          setLoading(false);
+        }
+      } else {
+        setError(err.message || 'Failed to sign in with Google');
+        setLoading(false);
+      }
     }
   };
 
@@ -134,8 +146,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Monitor Auth State & Magic Link callbacks
+  // Monitor Auth State, Redirect login & Magic Link callbacks
   useEffect(() => {
+    const handleRedirectCallback = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result?.user) {
+          await syncUserToFirestore(result.user);
+        }
+      } catch (err: any) {
+        console.error('Error getting Google redirect login result:', err);
+        setError(err.message || 'Failed to sign in with Google redirect result.');
+      }
+    };
+    handleRedirectCallback();
+
     const handleMagicLinkCallback = async () => {
       if (isSignInWithEmailLink(auth, window.location.href)) {
         setLoading(true);
