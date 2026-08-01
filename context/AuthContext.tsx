@@ -44,34 +44,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     try {
       const userRef = doc(db, 'users', firebaseUser.uid);
-      const userSnap = await getDoc(userRef);
-
       const photoURL = firebaseUser.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${firebaseUser.email}`;
       const name = firebaseUser.displayName || localStorage.getItem('pendingRegisterName') || firebaseUser.email?.split('@')[0] || 'Anonymous';
-      
       const provider = firebaseUser.providerData[0]?.providerId || 'email-link';
 
-      if (!userSnap.exists()) {
-        await setDoc(userRef, {
-          uid: firebaseUser.uid,
-          name,
-          email: firebaseUser.email,
-          photoURL,
-          provider,
-          createdAt: serverTimestamp(),
-          lastLogin: serverTimestamp(),
-        });
-      } else {
-        await updateDoc(userRef, {
-          lastLogin: serverTimestamp(),
-          name: firebaseUser.displayName || userSnap.data().name || name,
-          photoURL: firebaseUser.photoURL || userSnap.data().photoURL || photoURL,
-        });
-      }
+      // Use Auth creation time for createdAt so it is consistent and constant on every login
+      const createdAt = firebaseUser.metadata.creationTime
+        ? new Date(firebaseUser.metadata.creationTime)
+        : new Date();
+
+      // Write directly with merge to speed up performance, save reads, and bypass read permission gates
+      await setDoc(userRef, {
+        uid: firebaseUser.uid,
+        name,
+        email: firebaseUser.email,
+        photoURL,
+        provider,
+        createdAt,
+        lastLogin: serverTimestamp(),
+      }, { merge: true });
       
       // Cleanup temporary storage
       localStorage.removeItem('pendingRegisterName');
+      localStorage.removeItem('authSyncError'); // Clear previous error on success
     } catch (err: any) {
+      localStorage.setItem('authSyncError', err.message || err.toString());
       if (err.code === 'unavailable' || err.message?.includes('offline')) {
         console.warn('Firestore is currently offline. User data sync deferred.');
       } else {

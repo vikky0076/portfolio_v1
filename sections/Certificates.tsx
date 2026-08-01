@@ -7,7 +7,7 @@ import { Award, ExternalLink } from 'lucide-react';
 const CERTIFICATES = [
   { name: 'AI for Sustainability Virtual Internship', issuer: '1M1B & IBM SkillsBuild', href: 'https://skillsbuild.org/' },
   { name: 'Fundamentals of Sustainability and Technology', issuer: 'IBM SkillsBuild', href: 'https://skillsbuild.org/' },
-  { name: 'AI Skills Passport', issuer: 'EY & Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },
+  { name: 'AI Skills Passport', issuer: 'EY & Microsoft', href: '/assets/microsoft_learn_achievements.pdf' },
   { name: 'Data Analysis with Python', issuer: 'Cognitive Class (IBM)', href: 'https://courses.cognitiveclass.ai/certificates/425a8905a59c47ebb5a619ec72374a9c' },
   { name: 'Exploring Data Transformation with Google Cloud', issuer: 'Google Cloud', href: 'https://grow.google/' },
   { name: 'Digital Skills: User Experience', issuer: 'Accenture', href: 'https://www.futurelearn.com/certificates/ioscxbf' },
@@ -15,8 +15,8 @@ const CERTIFICATES = [
   { name: 'Introduction to Generative AI', issuer: 'Google Cloud', href: 'https://grow.google/' },
   { name: 'Introduction to Prompt Engineering', issuer: 'Simplilearn', href: 'https://simplilearn.com' },
   { name: 'Python for Data Science', issuer: 'IBM', href: 'https://credentials.edx.org/' },
-  { name: 'AI Fundamentals', issuer: 'Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },
-  { name: 'Azure Fundamentals', issuer: 'Microsoft', href: 'https://learn.microsoft.com/en-us/credentials/' },
+  { name: 'AI Fundamentals', issuer: 'Microsoft', href: '/assets/microsoft_learn_achievements.pdf' },
+  { name: 'Azure Fundamentals', issuer: 'Microsoft', href: '/assets/microsoft_learn_achievements.pdf' },
   { name: 'Google AI Essentials', issuer: 'Google', href: 'https://grow.google/intl/en_in/' },
   { name: '100+ More Certificates', issuer: 'Various Platforms', href: 'https://github.com/vikky0076' },
 ];
@@ -45,23 +45,20 @@ export default function Certificates() {
         {/* Certificates Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {CERTIFICATES.map((cert, idx) => (
-            <motion.a
+            <motion.div
               key={idx}
-              href={cert.href}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="glass-card rounded-2xl p-5 hover:border-accent/20 hover:bg-secondary/35 group transition-all duration-300 flex items-center justify-between border border-white/5 bg-secondary/20 shadow-md hover:scale-[1.02]"
+              className="glass-card rounded-2xl p-5 flex items-center justify-between border border-white/5 bg-secondary/20 shadow-md select-none pointer-events-none cursor-default opacity-85"
             >
               <div className="flex items-center gap-4 text-left min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center shrink-0 text-accent group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center shrink-0 text-accent">
                   <Award size={20} />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-white group-hover:text-accent transition-colors duration-300 truncate mb-1">
+                  <h3 className="text-sm font-bold text-white truncate mb-1">
                     {cert.name}
                   </h3>
                   <p className="text-xs text-text-secondary font-medium font-sans">
@@ -69,8 +66,7 @@ export default function Certificates() {
                   </p>
                 </div>
               </div>
-              <ExternalLink size={14} className="text-text-secondary group-hover:text-white transition-colors shrink-0 ml-2" />
-            </motion.a>
+            </motion.div>
           ))}
         </div>
 

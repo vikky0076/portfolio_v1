@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, LogOut, ShieldAlert, Download } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
@@ -17,12 +17,34 @@ const NAV_ITEMS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const listVariants = {
+  open: {
+    transition: { staggerChildren: 0.05, delayChildren: 0.08 }
+  },
+  closed: {
+    transition: { staggerChildren: 0.03, staggerDirection: -1 }
+  }
+} as const;
+
+const itemVariants = {
+  open: { x: 0, opacity: 1, transition: { type: 'spring' as const, stiffness: 280, damping: 22 } },
+  closed: { x: 30, opacity: 0, transition: { type: 'spring' as const, stiffness: 280, damping: 22 } }
+} as const;
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, logout } = useAuth();
   const router = useRouter();
+
+  const handleResumeClick = (e: React.MouseEvent) => {
+    if (!user) {
+      e.preventDefault();
+      router.push('/login');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +68,17 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   const handleLinkClick = (href: string) => {
     setMobileOpen(false);
     const target = document.querySelector(href);
@@ -53,6 +86,10 @@ export default function Navbar() {
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  if (pathname !== '/') {
+    return null;
+  }
 
   return (
     <>
@@ -127,7 +164,8 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="/assets/resume.pdf"
-              download="Vignesh_B_Resume.pdf"
+              download={user ? "Vignesh_B_Resume.pdf" : undefined}
+              onClick={handleResumeClick}
               className="relative inline-flex items-center gap-1.5 justify-center px-4 py-2 text-[10px] uppercase tracking-widest font-bold font-display rounded-full border border-white/10 bg-secondary/35 hover:bg-white/5 hover:border-white/20 text-white shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none"
             >
               <Download size={12} className="text-accent animate-pulse" />
@@ -249,18 +287,19 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={listVariants}
             className="fixed inset-0 z-40 bg-primary/95 backdrop-blur-lg pt-24 px-6 flex flex-col gap-6 lg:hidden"
           >
-            <nav className="flex flex-col gap-5 justify-center items-center mt-8">
+            <motion.nav className="flex flex-col gap-5 justify-center items-center mt-8">
               {NAV_ITEMS.map((item) => {
                 const id = item.href.replace('#', '');
                 const isActive = activeSection === id;
                 return (
-                  <a
+                  <motion.a
+                    variants={itemVariants}
                     key={item.label}
                     href={item.href}
                     onClick={(e) => {
@@ -272,22 +311,27 @@ export default function Navbar() {
                     }`}
                   >
                     {item.label}
-                  </a>
+                  </motion.a>
                 );
               })}
-            </nav>
+            </motion.nav>
             <div className="flex flex-col items-center gap-4 mt-6 w-full max-w-xs mx-auto">
-              <a
+              <motion.a
+                variants={itemVariants}
                 href="/assets/resume.pdf"
-                download="Vignesh_B_Resume.pdf"
+                download={user ? "Vignesh_B_Resume.pdf" : undefined}
+                onClick={handleResumeClick}
                 className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full border border-white/10 bg-secondary/35 hover:bg-white/5 hover:border-white/20 text-white flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer focus:outline-none"
               >
                 <Download size={14} className="text-accent" />
                 Download Resume
-              </a>
+              </motion.a>
 
               {user ? (
-                <div className="flex flex-col items-center gap-3 w-full border border-white/5 bg-secondary/20 rounded-2xl p-4 shadow-lg">
+                <motion.div
+                  variants={itemVariants}
+                  className="flex flex-col items-center gap-3 w-full border border-white/5 bg-secondary/20 rounded-2xl p-4 shadow-lg"
+                >
                   <div className="flex items-center gap-3 w-full">
                     <img
                       src={user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.email}`}
@@ -330,9 +374,10 @@ export default function Navbar() {
                       Logout
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ) : (
-                <button
+                <motion.button
+                  variants={itemVariants}
                   onClick={() => {
                     setMobileOpen(false);
                     router.push('/login');
@@ -340,10 +385,11 @@ export default function Navbar() {
                   className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full border border-accent text-accent hover:bg-accent/10 transition-all duration-300 cursor-pointer focus:outline-none"
                 >
                   Sign In
-                </button>
+                </motion.button>
               )}
 
-              <button
+              <motion.button
+                variants={itemVariants}
                 onClick={(e) => {
                   e.preventDefault();
                   setMobileOpen(false);
@@ -352,7 +398,7 @@ export default function Navbar() {
                 className="w-full text-center py-3 text-xs uppercase tracking-widest font-bold font-display rounded-full bg-accent text-white shadow-[0_0_20px_rgba(255,94,0,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer focus:outline-none"
               >
                 Let's Talk
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         )}

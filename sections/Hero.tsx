@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import profileImg from '@/public/assets/profile.png';
+import profileImg from '@/public/assets/vignesh_hero.png';
 import { motion } from 'framer-motion';
 import { FaLinkedinIn, FaGithub, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
@@ -128,7 +128,7 @@ export default function Hero() {
             className="flex items-center gap-3"
           >
             {[
-              { icon: FaLinkedinIn, href: 'https://linkedin.com/in/vignesh-b' },
+              { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/vignesh076' },
               { icon: FaGithub, href: 'https://github.com/vikky0076' },
               { icon: FaEnvelope, href: 'mailto:vigneshb00x@gmail.com' },
               { icon: FaWhatsapp, href: 'https://wa.me/919943349064' },
@@ -185,7 +185,36 @@ export default function Hero() {
               <div className="absolute inset-x-[-8px] inset-y-[-3px] border border-dashed border-[#FF8B3D]/20 rounded-full rotate-[8deg] scale-y-30 animate-orbit-rotate-reverse opacity-60" />
             </div>
 
+            {/* Animated Cyber Hologram Background */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+              {/* Concentric Rotating Orbits */}
+              <div className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-full border border-dashed border-accent/20 animate-orbit-rotate opacity-60" />
+              <div className="absolute w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] lg:w-[500px] lg:h-[500px] rounded-full border border-dotted border-white/5 animate-orbit-rotate-reverse opacity-40" />
+              <div className="absolute w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] lg:w-[300px] lg:h-[300px] rounded-full border border-accent/10 opacity-30" />
 
+              {/* Glowing Nebula Blobs */}
+              <div className="absolute top-[25%] left-1/2 -translate-x-1/2 w-[220px] h-[220px] rounded-full bg-accent/15 blur-[60px] animate-pulse-slow" />
+              <div className="absolute bottom-[30%] left-[20%] w-[180px] h-[180px] rounded-full bg-[#FF8B3D]/10 blur-[50px]" />
+              
+              {/* Animated Floating Particles */}
+              <div className="absolute inset-0">
+                {[...Array(10)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-accent/60 shadow-[0_0_8px_#FF5E00] animate-float"
+                    style={{
+                      width: `${(i % 3) + 2}px`,
+                      height: `${(i % 3) + 2}px`,
+                      left: `${(i * 13) % 80 + 10}%`,
+                      top: `${(i * 23) % 70 + 15}%`,
+                      animationDuration: `${((i * 1.5) % 4) + 4}s`,
+                      animationDelay: `${i * 0.4}s`,
+                      opacity: 0.3 + (i % 5) * 0.1,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
 
             {/* Image Container with CSS Mask for smooth fade-out */}
             <div 

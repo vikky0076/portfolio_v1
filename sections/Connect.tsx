@@ -57,11 +57,8 @@ export default function Connect() {
                 <div className="w-12 h-12 rounded-2xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent mb-4 group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(255,94,0,0.1)] group-hover:shadow-[0_0_15px_rgba(255,94,0,0.3)]">
                   <Icon size={20} />
                 </div>
-                <span className="text-[10px] uppercase tracking-widest font-extrabold font-display text-accent mb-1 block">
+                <span className="text-sm sm:text-base text-white group-hover:text-accent font-sans font-bold text-center transition-colors duration-300">
                   {item.label}
-                </span>
-                <span className="text-xs sm:text-sm text-white group-hover:text-white/90 font-sans font-medium break-all text-center">
-                  {item.value}
                 </span>
               </>
             );

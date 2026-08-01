@@ -65,6 +65,17 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen w-full bg-[#0B0B0B] text-white flex items-center justify-center relative overflow-hidden select-none font-sans">
       
+      {/* Return to Home Button */}
+      <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-50">
+        <button
+          onClick={() => router.push('/')}
+          className="flex items-center gap-2 group px-4 py-2 border border-white/5 bg-secondary/25 hover:bg-accent/10 hover:border-accent/40 rounded-full text-text-secondary hover:text-white transition-all duration-300 backdrop-blur-md shadow-lg cursor-pointer"
+        >
+          <ArrowLeft size={16} className="transform group-hover:-translate-x-1 transition-transform duration-300 text-accent" />
+          <span className="text-[10px] uppercase tracking-widest font-extrabold font-display">Back to Home</span>
+        </button>
+      </div>
+
       {/* Background Decorative Blur Blobs */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[20%] right-[-10%] w-[450px] h-[450px] bg-accent/10 rounded-full blur-[110px] animate-pulse-slow" />

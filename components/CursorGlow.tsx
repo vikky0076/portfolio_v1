@@ -5,8 +5,15 @@ import React, { useEffect, useState } from 'react';
 export default function CursorGlow() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     // Disable cursor glow on touch devices
     if (window.matchMedia('(pointer: coarse)').matches) {
       return;
@@ -35,15 +42,19 @@ export default function CursorGlow() {
       animationFrameId = requestAnimationFrame(updatePosition);
     };
 
-    updatePosition();
+    if (visible) {
+      updatePosition();
+    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
-  }, [visible]);
+  }, [mounted, visible]);
 
-  if (!visible) return null;
+  if (!mounted || !visible) return null;
 
   return (
     <div
@@ -55,3 +66,4 @@ export default function CursorGlow() {
     />
   );
 }
+

@@ -3,6 +3,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { User, MapPin, GraduationCap, Mail, Globe2, Lightbulb, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import profileImg from '@/public/assets/profile.png';
 
 interface CountUpCellProps {
   target: number;
@@ -77,16 +79,83 @@ export default function About() {
           <div className="w-12 h-1 bg-accent mx-auto rounded-full" />
         </div>
 
-        {/* 3-Card Grid */}
+        {/* 4-Card Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Card 1: Intro (Left) */}
+          {/* Card 1: Profile Image (Left Visual Anchor) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-4 glass-card rounded-3xl p-8 flex flex-col justify-between"
+            className="lg:col-span-4 glass-card rounded-3xl p-4 flex flex-col items-stretch justify-stretch relative overflow-hidden group"
+          >
+            {/* Ambient Background Glow behind the card */}
+            <div className="absolute -inset-2 bg-gradient-to-b from-accent/20 to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700 pointer-events-none" />
+
+            {/* Futuristic Corner Accents */}
+            <div className="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-accent/60 group-hover:border-accent group-hover:drop-shadow-[0_0_8px_#FF5E00] transition-all duration-300 z-30" />
+            <div className="absolute top-6 right-6 w-4 h-4 border-t-2 border-r-2 border-accent/60 group-hover:border-accent group-hover:drop-shadow-[0_0_8px_#FF5E00] transition-all duration-300 z-30" />
+            <div className="absolute bottom-6 left-6 w-4 h-4 border-b-2 border-l-2 border-accent/60 group-hover:border-accent group-hover:drop-shadow-[0_0_8px_#FF5E00] transition-all duration-300 z-30" />
+            <div className="absolute bottom-6 right-6 w-4 h-4 border-b-2 border-r-2 border-accent/60 group-hover:border-accent group-hover:drop-shadow-[0_0_8px_#FF5E00] transition-all duration-300 z-30" />
+
+            {/* Image Inner Container / Glowing Orange Frame */}
+            <div className="relative w-full h-full min-h-[350px] lg:min-h-0 rounded-2xl overflow-hidden bg-primary/30 border-2 border-accent/70 shadow-[0_0_20px_rgba(255,94,0,0.25)] group-hover:shadow-[0_0_35px_rgba(255,94,0,0.65)] group-hover:border-accent transition-all duration-500 flex justify-center items-end p-2">
+              {/* Decorative Tech Overlay Grid */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity" />
+              
+              {/* Glow Behind Portrait */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-[65%] bg-accent/20 rounded-full blur-[45px] pointer-events-none opacity-50 group-hover:opacity-90 transition-opacity duration-500" />
+
+              {/* Animated Background Orbits */}
+              <div className="absolute w-[200px] h-[200px] rounded-full border border-dashed border-accent/20 animate-orbit-rotate top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="absolute w-[260px] h-[260px] rounded-full border border-dotted border-white/5 animate-orbit-rotate-reverse top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40" />
+
+              {/* Drifting Floating Sparks / Particles */}
+              <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-accent/50 shadow-[0_0_6px_#FF5E00] animate-float"
+                    style={{
+                      width: `${(i % 2) + 2}px`,
+                      height: `${(i % 2) + 2}px`,
+                      left: `${(i * 19) % 80 + 10}%`,
+                      top: `${(i * 17) % 60 + 20}%`,
+                      animationDuration: `${((i * 1.2) % 3) + 3}s`,
+                      animationDelay: `${i * 0.5}s`,
+                      opacity: 0.2 + (i % 4) * 0.15,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* The portrait image */}
+              <div className="relative w-full h-[95%] select-none z-10 flex justify-center items-end">
+                <Image
+                  src={profileImg}
+                  alt="Vignesh B portrait"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-contain object-bottom transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:filter contrast-[1.02]"
+                />
+              </div>
+
+              {/* Bottom Fade Gradient Overlay */}
+              <div className="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-primary/95 to-transparent z-20 pointer-events-none" />
+              
+              {/* Top/Side subtle vignetting */}
+              <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-primary/30 z-20 pointer-events-none" />
+            </div>
+          </motion.div>
+
+          {/* Card 2: Intro (Philosophy) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-8 glass-card rounded-3xl p-8 flex flex-col justify-between"
           >
             <div>
               <span className="text-[10px] uppercase tracking-widest font-bold text-accent mb-2 block">
@@ -102,15 +171,12 @@ export default function About() {
                   { label: 'Software Engineer', isHighlight: false },
                   { label: 'AI Engineer', isHighlight: false },
                   { label: 'Full Stack Developer', isHighlight: false },
-                  { label: 'Future ', highlightText: 'ML Engineer', isHighlight: true },
+                  { label: 'ML Engineer', isHighlight: true },
                 ].map((role, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-white/95">
                     <span className="text-accent font-bold">&gt;</span>
                     {role.isHighlight ? (
-                      <span>
-                        {role.label}
-                        <span className="text-accent font-semibold">{role.highlightText}</span>
-                      </span>
+                      <span className="text-accent font-semibold">{role.label}</span>
                     ) : (
                       <span>{role.label}</span>
                     )}
@@ -141,7 +207,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-4 glass-card rounded-3xl p-8 flex flex-col justify-between"
+            className="lg:col-span-6 glass-card rounded-3xl p-8 flex flex-col justify-between"
           >
             <div>
               <span className="text-[10px] uppercase tracking-widest font-bold text-accent mb-4 block">
@@ -194,7 +260,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-4 glass-card rounded-3xl p-8 flex flex-col justify-between"
+            className="lg:col-span-6 glass-card rounded-3xl p-8 flex flex-col justify-between"
           >
             <div>
               <span className="text-[10px] uppercase tracking-widest font-bold text-accent mb-4 block">

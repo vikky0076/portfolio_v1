@@ -69,6 +69,14 @@ export default function AdminPage() {
   const [statusFilter, setStatusFilter] = useState<'All' | 'New' | 'Read' | 'Replied'>('All');
   const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
   const [error, setError] = useState<string | null>(null);
+  const [syncError, setSyncError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const err = localStorage.getItem('authSyncError');
+      if (err) setSyncError(err);
+    }
+  }, []);
 
   // Load Firestore data
   const fetchData = async () => {
@@ -114,6 +122,36 @@ export default function AdminPage() {
       fetchData();
     }
   }, [user, authLoading]);
+
+  // Search & Filter & Sort processing
+  const processedMessages = useMemo(() => {
+    let result = [...messages];
+
+    // 1. Status Filter
+    if (statusFilter !== 'All') {
+      result = result.filter(m => m.status === statusFilter);
+    }
+
+    // 2. Search
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      result = result.filter(m => 
+        m.name.toLowerCase().includes(term) ||
+        m.email.toLowerCase().includes(term) ||
+        m.subject.toLowerCase().includes(term) ||
+        m.message.toLowerCase().includes(term)
+      );
+    }
+
+    // 3. Sort
+    result.sort((a, b) => {
+      const dateA = a.createdAt instanceof Timestamp ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime();
+      const dateB = b.createdAt instanceof Timestamp ? b.createdAt.toDate().getTime() : new Date(b.createdAt).getTime();
+      return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+
+    return result;
+  }, [messages, searchTerm, statusFilter, sortOrder]);
 
   // Auth Guard: Direct non-authenticated or non-admin users away
   if (authLoading) {
@@ -184,35 +222,7 @@ export default function AdminPage() {
     return msgDate.toDateString() === today.toDateString();
   }).length;
 
-  // Search & Filter & Sort processing
-  const processedMessages = useMemo(() => {
-    let result = [...messages];
 
-    // 1. Status Filter
-    if (statusFilter !== 'All') {
-      result = result.filter(m => m.status === statusFilter);
-    }
-
-    // 2. Search
-    if (searchTerm.trim()) {
-      const term = searchTerm.toLowerCase();
-      result = result.filter(m => 
-        m.name.toLowerCase().includes(term) ||
-        m.email.toLowerCase().includes(term) ||
-        m.subject.toLowerCase().includes(term) ||
-        m.message.toLowerCase().includes(term)
-      );
-    }
-
-    // 3. Sort
-    result.sort((a, b) => {
-      const dateA = a.createdAt instanceof Timestamp ? a.createdAt.toDate().getTime() : new Date(a.createdAt).getTime();
-      const dateB = b.createdAt instanceof Timestamp ? b.createdAt.toDate().getTime() : new Date(b.createdAt).getTime();
-      return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
-    });
-
-    return result;
-  }, [messages, searchTerm, statusFilter, sortOrder]);
 
   // Actions
   const handleMarkAsRead = async (id: string, currentStatus: string) => {
@@ -344,6 +354,17 @@ export default function AdminPage() {
               >
                 <AlertCircle size={14} className="shrink-0" />
                 <span>{error}</span>
+              </motion.div>
+            )}
+
+            {syncError && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs px-4 py-3 rounded-xl flex items-center gap-2.5"
+              >
+                <AlertCircle size={14} className="shrink-0" />
+                <span>Firestore Sync Error: {syncError}</span>
               </motion.div>
             )}
 
