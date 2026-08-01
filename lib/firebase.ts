@@ -27,7 +27,7 @@ const db = initializeFirestore(
     }),
     experimentalForceLongPolling: true,
   },
-  process.env.NEXT_PUBLIC_FIREBASE_DATABASE_ID || "(default)"
+  process.env.NEXT_PUBLIC_FIREBASE_DATABASE_ID || "default"
 );
 
 // Initialize Analytics safely only in browser environments if supported
