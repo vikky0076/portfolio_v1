@@ -7,6 +7,14 @@ import { FaGithub } from 'react-icons/fa';
 
 const PROJECTS = [
   {
+    title: 'Netflix Recommendation System',
+    desc: 'Intelligent movie recommendation system delivering personalized film suggestions and interactive user curation.',
+    tags: ['React', 'Machine Learning', 'Tailwind CSS', 'Vercel'],
+    liveHref: 'https://netflix-rec-sys.vercel.app/',
+    githubHref: 'https://github.com/vikky0076',
+    previewType: 'netflix',
+  },
+  {
     title: 'Student AI Chatbot',
     desc: 'Conversational AI agent for students, offering quick guidance, reference search, and study guides.',
     tags: ['Next.js', 'OpenAI API', 'Framer Motion'],
@@ -75,6 +83,36 @@ const PROJECTS = [
 export default function Projects() {
   const renderPreview = (type: string) => {
     switch (type) {
+      case 'netflix':
+        return (
+          <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative">
+            <div className="flex justify-between items-center border-b border-white/5 pb-1">
+              <span className="text-[8px] font-bold font-display text-red-500 uppercase tracking-wider flex items-center gap-1">
+                <Film size={10} className="text-red-500" /> Netflix Recs
+              </span>
+              <span className="text-[7px] text-red-400 font-mono font-bold bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20">
+                98% Match
+              </span>
+            </div>
+            <div className="flex items-center gap-2 py-1">
+              <div className="w-10 h-12 bg-red-950/40 border border-red-500/30 rounded-md flex flex-col items-center justify-center relative overflow-hidden group/poster">
+                <Play size={12} className="text-red-500 animate-pulse" />
+                <span className="text-[5px] text-white/80 font-bold mt-1">TOP 10</span>
+              </div>
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
+                <span className="text-[8px] font-bold text-white truncate">Trending Pick</span>
+                <span className="text-[6px] text-text-secondary">AI Recommendation Engine</span>
+                <div className="flex items-center gap-1 mt-0.5">
+                  <span className="text-[6px] px-1 py-0.5 rounded bg-red-500/20 text-red-400 font-medium">4K Ultra</span>
+                  <span className="text-[6px] text-text-secondary">Interactive</span>
+                </div>
+              </div>
+            </div>
+            <div className="w-full h-1 bg-primary rounded-full overflow-hidden">
+              <div className="h-full bg-red-500 w-[88%]" />
+            </div>
+          </div>
+        );
       case 'chat':
         return (
           <div className="w-full h-full bg-secondary/50 rounded-xl border border-white/5 p-3 flex flex-col justify-between overflow-hidden relative group/chat-preview">

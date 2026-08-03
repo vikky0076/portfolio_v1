@@ -9,8 +9,8 @@ const CONNECT_ITEMS = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'vigneshb00x@gmail.com',
-    href: 'mailto:vigneshb00x@gmail.com',
+    value: 'vigneshbs7653@gmail.com',
+    href: 'mailto:vigneshbs7653@gmail.com',
   },
   {
     icon: FaLinkedin,

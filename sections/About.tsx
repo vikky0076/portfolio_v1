@@ -220,7 +220,11 @@ export default function About() {
                   { icon: User, label: 'Name', value: 'Vignesh B' },
                   { icon: MapPin, label: 'Location', value: 'Arasampattu, Kallakurichi, Tamil Nadu, India' },
                   { icon: GraduationCap, label: 'Education', value: 'B.Sc Computer Science (AI & ML), Takshashila University, 2025 - 2028' },
+<<<<<<< HEAD
                   { icon: Mail, label: 'Email', value: 'vigneshb00x@gmail.com', isLink: true, href: 'mailto:vigneshbs7653@gmail.com' },
+=======
+                  { icon: Mail, label: 'Email', value: 'vigneshbs7653@gmail.com', isLink: true, href: 'mailto:vigneshbs7653@gmail.com' },
+>>>>>>> 7fd90f2 (email update)
                   { icon: Globe2, label: 'Languages', value: 'Tamil | English' },
                   { icon: Lightbulb, label: 'Interests', value: 'Web Dev, AI, Tech Gadgets, Problem Solving, Learning & Teaching' },
                 ].map((item, idx) => {

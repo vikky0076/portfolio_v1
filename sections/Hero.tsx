@@ -130,7 +130,7 @@ export default function Hero() {
             {[
               { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/vignesh076' },
               { icon: FaGithub, href: 'https://github.com/vikky0076' },
-              { icon: FaEnvelope, href: 'mailto:vigneshb00x@gmail.com' },
+              { icon: FaEnvelope, href: 'mailto:vigneshbs7653@gmail.com' },
               { icon: FaWhatsapp, href: 'https://wa.me/919943349064' },
             ].map((social, index) => {
               const Icon = social.icon;
