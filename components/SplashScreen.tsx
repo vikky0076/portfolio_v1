@@ -2,12 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Faster_One } from 'next/font/google';
-
-const fasterOne = Faster_One({
-  weight: '400',
-  subsets: ['latin'],
-});
 
 export default function SplashScreen() {
   const [show, setShow] = useState(true);
@@ -76,7 +70,7 @@ export default function SplashScreen() {
           {/* Typing Text Container */}
           <div className="text-center flex flex-col gap-4 max-w-2xl relative z-10 font-display">
             {/* Line 1: welcome to my portfolio */}
-            <h1 className={`${fasterOne.className} text-3xl sm:text-5xl lg:text-6xl font-normal uppercase tracking-wide text-accent drop-shadow-[0_0_35px_rgba(255,94,0,0.35)] min-h-[50px] sm:min-h-[80px]`}>
+            <h1 className="font-faster text-3xl sm:text-5xl lg:text-6xl font-normal uppercase tracking-wide text-accent drop-shadow-[0_0_35px_rgba(255,94,0,0.35)] min-h-[50px] sm:min-h-[80px]">
               {line1}
               {line1.length < fullLine1.length && line1.length > 0 && (
                 <span className="inline-block w-1.5 h-8 sm:h-12 lg:h-14 ml-1 bg-accent animate-pulse" />
@@ -84,7 +78,7 @@ export default function SplashScreen() {
             </h1>
 
             {/* Line 2: thank you for visiting my portfolio */}
-            <p className={`${fasterOne.className} text-sm sm:text-2xl lg:text-3xl font-normal uppercase tracking-wide text-accent drop-shadow-[0_0_25px_rgba(255,94,0,0.35)] min-h-[30px]`}>
+            <p className="font-faster text-sm sm:text-2xl lg:text-3xl font-normal uppercase tracking-wide text-accent drop-shadow-[0_0_25px_rgba(255,94,0,0.35)] min-h-[30px]">
               {line2}
               {line2.length < fullLine2.length && line1.length === fullLine1.length && (
                 <span className="inline-block w-1 h-5 sm:h-7 lg:h-8 ml-1 bg-accent animate-pulse" />

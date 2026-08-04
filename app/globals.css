@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Faster+One&family=Playfair+Display:ital,wght@1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,10 +8,11 @@
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #B8B8B8;
   
-  --font-sans: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
-  --font-display: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
-  --font-syne: var(--font-syne), sans-serif;
-  --font-playfair: var(--font-playfair), serif;
+  --font-sans: 'Plus Jakarta Sans', var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
+  --font-syne: 'Syne', var(--font-syne), sans-serif;
+  --font-playfair: 'Playfair Display', var(--font-playfair), serif;
+  --font-faster: 'Faster One', cursive;
 
   --animate-orbit-rotate: orbit-rotate 35s linear infinite;
   --animate-orbit-rotate-reverse: orbit-rotate-reverse 45s linear infinite;
